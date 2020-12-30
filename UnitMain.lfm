@@ -1,0 +1,17 @@
+object FormMain: TFormMain
+  Left = 583
+  Height = 340
+  Top = 238
+  Width = 439
+  Caption = 'CrazzzySnow'
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnPaint = FormPaint
+  LCLVersion = '2.0.10.0'
+  object TimerUpdate: TTimer
+    Interval = 33
+    OnTimer = TimerupdateTimer
+    Left = 105
+    Top = 71
+  end
+end
