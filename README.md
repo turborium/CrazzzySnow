@@ -1,6 +1,8 @@
 # CrazzzySnow
 **Простейший эффект снега на Lazarus**
 
+**Смотри ролик:** https://youtu.be/viyM-jxnbZY
+
 Поддерживаемые операционные системы:
 * Windows
 * Linux
