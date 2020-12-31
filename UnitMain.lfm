@@ -7,6 +7,7 @@ object FormMain: TFormMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnPaint = FormPaint
+  Position = poScreenCenter
   LCLVersion = '2.0.10.0'
   object TimerUpdate: TTimer
     Interval = 33

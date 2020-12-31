@@ -25,7 +25,6 @@ type
 
   TFormMain = class(TForm)
     TimerUpdate: TTimer;
-    procedure FormClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormPaint(Sender: TObject);
@@ -64,9 +63,18 @@ var
   I: Integer;
   DeltaX, t: Single;
 begin
-  // заполняем форму черным цветом
-  Canvas.Brush.Color := clBlack;
-  Canvas.FillRect(0, 0, ClientWidth, ClientHeight);
+  // заполняем форму черным цветом/фоновым изображением
+  if BackgroundImage <> nil then
+  begin
+    Canvas.Draw(0, 0, BackgroundImage);
+    Canvas.Brush.Color := clBlack;
+    Canvas.Font.Color := clWhite;
+    Canvas.TextOut(10, 10, 'Winter night by prusakov (www.deviantart.com/prusakov/)');
+  end else
+  begin
+    Canvas.Brush.Color := clBlack;
+    Canvas.FillRect(0, 0, ClientWidth, ClientHeight);
+  end;
 
   // рисуем снежинки
   Canvas.Pen.Style := psClear;
@@ -118,11 +126,6 @@ begin
     end;
   end;
   // создаем снег
-  MakeSnow;
-end;
-
-procedure TFormMain.FormClick(Sender: TObject);
-begin
   MakeSnow;
 end;
 
