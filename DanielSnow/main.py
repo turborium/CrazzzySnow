@@ -115,7 +115,7 @@ if __name__ == "__main__":
 
     # Раскомментируйте для отрисовки изображения.
     
-    # background = PhotoImage(file="background.png")
+    # background = PhotoImage(file="./assets/background.png")
     # Canvas.create_image(1, 1, image=background, anchor="nw")
     # Canvas.create_text(235, 10, text="Winter night by prusakov (www.deviantart.com/prusakov/)", fill="red")
     
