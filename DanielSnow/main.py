@@ -4,8 +4,8 @@ from random import randrange, uniform
 from math import sin, pi
 
 # задаем ширину и высоту окна
-ClientWidth  = 549 #1280
-ClientHeight = 425 #640
+ClientWidth  = 720
+ClientHeight = 480
 
 # число снежинок на полотне
 SnowflakeCount = 400
@@ -27,11 +27,6 @@ class TSnowflake:
         self.time = time            # локальное время
         self.TimeDelta = TimeDelta  # дельта изменения времени
 
-def Invalidate():
-    UpdateSnow()
-
-    Canvas.after(35, Invalidate)
-    
 def MakeSnowflake():
     """MakeSnowflake - создает новую снежинку"""
     MaxSpeed = 5
@@ -62,12 +57,7 @@ def MakeSnowflake():
     id = Canvas.create_oval(x, y, x+size, y+size, fill="white", outline='white')
     
     return TSnowflake(x, y, speed, size, id, time, TimeDelta)
-
-def MakeSnow():
-    """MakeSnow - создает снежинки"""
-    for i in range(0, SnowflakeCount):
-        SnowflakeArray[i] = MakeSnowflake()
-        
+   
 def UpdateSnow():
     """UpdateSnow - обновление снежинок"""
     for i in range(0, SnowflakeCount):
@@ -96,13 +86,25 @@ def UpdateSnow():
         
         # пересоздаем снежинку, если она упала за границы формы
         if SnowflakeArray[i].y > ClientHeight:
+            Canvas.delete(SnowflakeArray[i].id) # удаляем объект снежинки для предотвращения утечки памяти
             SnowflakeArray[i] = MakeSnowflake()
+              
+def MakeSnow():
+    """MakeSnow - создает снежинки"""
+    for i in range(0, SnowflakeCount):
+        SnowflakeArray[i] = MakeSnowflake()
+
+def Invalidate():
+    UpdateSnow()
+
+    Canvas.after(33, Invalidate)
         
 # создаём и заполняем форму
 
 if __name__ == "__main__":
     FormMain = Tk()
     FormMain.title("DanielSnow")
+    FormMain.resizable(False, False)
     
     Canvas = Canvas(FormMain, 
                     width=ClientWidth, 
@@ -110,8 +112,14 @@ if __name__ == "__main__":
                     background="black")
     
     Canvas.grid()
+
+    # Раскомментируйте для отрисовки изображения.
+    
+    # background = PhotoImage(file="./assets/background.png")
+    # Canvas.create_image(1, 1, image=background, anchor="nw")
+    # Canvas.create_text(235, 10, text="Winter night by prusakov (www.deviantart.com/prusakov/)", fill="red")
     
     MakeSnow()                
     Invalidate()
-    
+
     FormMain.mainloop()
